@@ -24,6 +24,7 @@ build_extc(){
     git clone --depth 1 https://github.com/mskz-3110/extc.git
   fi
   
+  artifacts=()
   pushd extc
     bundle install
     if [ -f ../../gems/buildrake.gem ]; then
@@ -49,15 +50,21 @@ build_extc(){
             ;;
           esac
           for config in ${CONFIGS[@]}; do
-            echo "[${windows_visual_studio_version} ${windows_runtime} ${windows_arch} ${config}] ${cmake_generator}"
             WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} rake build
-            ls -lR lib
-            exit 0
+            lib_dir="${windows_visual_studio_version}_${windows_runtime}_${windows_arch}_${config}"
+            if [ ! -f "${lib_dir}/extc.lib" ]; then
+              exit 1
+            fi
+            if [ ! -f "${lib_dir}/extc.dll" ]; then
+              exit 1
+            fi
           done
         done
       done
     done
   popd
+  
+  ls -lR lib
 }
 
 pushd projects
