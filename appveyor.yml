@@ -1,6 +1,5 @@
-environment:
-  matrix:
-    - RUBY_VERSION: 22
+install:
+  - set PATH=C:\Ruby23\bin;%PATH%
 
 image:
   - Visual Studio 2013
