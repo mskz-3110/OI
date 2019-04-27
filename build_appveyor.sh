@@ -24,6 +24,7 @@ build_extc(){
     git clone --depth 1 https://github.com/mskz-3110/extc.git
   fi
   
+  check_files=()
   pushd extc
     bundle install
     if [ -f ../../gems/buildrake.gem ]; then
@@ -50,19 +51,21 @@ build_extc(){
           esac
           for config in ${CONFIGS[@]}; do
             WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} rake build &
-            wait $!
             lib_dir="lib/windows/${windows_visual_studio_version}_${windows_runtime}_${windows_arch}_${config}"
-            if [ ! -f "${lib_dir}/extc.lib" ]; then
-              exit 1
-            fi
-            if [ ! -f "${lib_dir}/extc.dll" ]; then
-              exit 1
-            fi
+            check_files+=("${PWD}/${lib_dir}/extc.lib")
+            check_files+=("${PWD}/${lib_dir}/extc.dll")
           done
         done
       done
     done
     wait
+    
+    for check_file in ${check_files[@]}; do
+      if [ ! -f "${check_file}" ]; then
+        echo "Not found: ${check_file}"
+        exit 1
+      fi
+    done
     
     mkdir artifacts
     mv lib artifacts/.
