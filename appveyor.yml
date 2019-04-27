@@ -9,7 +9,7 @@ build_script:
   - bash ./build_appveyor.sh
 
 artifacts:
-  - path: projects\extc\lib
-    name: lib\extc_lib_windows
+  - path: projects\extc\artifacts
+    name: extc_lib_windows
 
 skip_tags: true
