@@ -55,7 +55,7 @@ build_extc(){
           esac
           for buildrake_config in ${BUILDRAKE_CONFIGS[@]}; do
             echo "[${windows_visual_studio_version} ${windows_runtime} ${windows_arch} ${buildrake_config}] ${cmake_generator}"
-            WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" rake -t build windows ${buildrake_config}
+            WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" rake build windows ${buildrake_config}
           done
         done
       done

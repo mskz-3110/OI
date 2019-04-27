@@ -1,5 +1,5 @@
 install:
-  - set PATH=C:\Ruby23\bin;%PATH%
+  - set PATH=C:\Ruby24\bin;%PATH%
 
 image:
   - Visual Studio 2013
