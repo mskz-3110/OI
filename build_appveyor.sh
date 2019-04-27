@@ -31,7 +31,6 @@ build_extc(){
     fi
     
     rake setup
-    ls -lR build
     for windows_visual_studio_version in ${WINDOWS_VISUAL_STUDIO_VERSIONS[@]}; do
       for windows_runtime in ${WINDOWS_RUNTIMES[@]}; do
         for windows_arch in ${WINDOWS_ARCHS[@]}; do
