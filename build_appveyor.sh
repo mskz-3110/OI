@@ -51,6 +51,8 @@ build_extc(){
           for config in ${CONFIGS[@]}; do
             echo "[${windows_visual_studio_version} ${windows_runtime} ${windows_arch} ${config}] ${cmake_generator}"
             WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} rake build
+            ls -lR build/windows
+            exit 0
           done
         done
       done
