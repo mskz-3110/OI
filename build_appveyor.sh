@@ -15,6 +15,8 @@ case "${APPVEYOR_BUILD_WORKER_IMAGE}" in
   ;;
 esac
 
+cmake -v
+
 WINDOWS_RUNTIMES=(MT MD)
 WINDOWS_ARCHS=(Win32 x64)
 BUILDRAKE_CONFIGS=(debug release)
@@ -49,7 +51,8 @@ build_extc(){
       for windows_runtime in ${WINDOWS_RUNTIMES[@]}; do
         for windows_arch in ${WINDOWS_ARCHS[@]}; do
           for buildrake_config in ${BUILDRAKE_CONFIGS[@]}; do
-            WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" rake build windows ${buildrake_config}
+            echo "[${windows_visual_studio_version} ${windows_runtime} ${windows_arch} ${buildrake_config}] ${cmake_generator}"
+            WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" rake build windows ${buildrake_config} &
           done
         done
       done
@@ -60,3 +63,5 @@ build_extc(){
 pushd projects
   build_extc
 popd
+
+wait
