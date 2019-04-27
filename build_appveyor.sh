@@ -51,7 +51,7 @@ build_extc(){
           esac
           for config in ${CONFIGS[@]}; do
             WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} rake build
-            lib_dir="${windows_visual_studio_version}_${windows_runtime}_${windows_arch}_${config}"
+            lib_dir="lib/windows/${windows_visual_studio_version}_${windows_runtime}_${windows_arch}_${config}"
             if [ ! -f "${lib_dir}/extc.lib" ]; then
               exit 1
             fi

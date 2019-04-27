@@ -8,4 +8,8 @@ image:
 build_script:
   - bash ./build_appveyor.sh
 
+artifacts:
+  - path: projects\extc\lib
+    name: extc_lib_windows
+
 skip_tags: true
