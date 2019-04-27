@@ -24,7 +24,6 @@ build_extc(){
     git clone --depth 1 https://github.com/mskz-3110/extc.git
   fi
   
-  artifacts=()
   pushd extc
     bundle install
     if [ -f ../../gems/buildrake.gem ]; then
@@ -62,9 +61,9 @@ build_extc(){
         done
       done
     done
+    
+    ls -lR lib
   popd
-  
-  ls -lR lib
 }
 
 pushd projects

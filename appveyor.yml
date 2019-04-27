@@ -10,6 +10,6 @@ build_script:
 
 artifacts:
   - path: projects\extc\lib
-    name: extc_lib_windows
+    name: lib\extc_lib_windows
 
 skip_tags: true
