@@ -13,3 +13,6 @@ artifacts:
     name: extc_lib_windows
 
 skip_tags: true
+
+build:
+  parallel: true
