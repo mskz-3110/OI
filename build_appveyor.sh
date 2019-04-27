@@ -32,9 +32,6 @@ build_extc(){
     fi
     
     rake setup
-    pushd cpp/extc
-      rake setup
-    popd
     for windows_visual_studio_version in ${WINDOWS_VISUAL_STUDIO_VERSIONS[@]}; do
       for windows_runtime in ${WINDOWS_RUNTIMES[@]}; do
         for windows_arch in ${WINDOWS_ARCHS[@]}; do
