@@ -19,16 +19,17 @@ case "${APPVEYOR_BUILD_WORKER_IMAGE}" in
   ;;
 esac
 
-pushd gems
-  gem install buildrake.gem
-popd
-
 build_extc(){
   if [ ! -d extc ]; then
     git clone --depth 1 https://github.com/mskz-3110/extc.git
   fi
   
   pushd extc
+    bundle install
+    if [ -f ../../gems/buildrake.gem ]; then
+      gem install ../../gems/buildrake.gem
+    fi
+    
     rake setup
     rake build windows debug
 #    rake build windows release
