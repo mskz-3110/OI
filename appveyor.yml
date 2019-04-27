@@ -12,6 +12,6 @@ configuration:
   - Release
 
 build_script:
-  - bash ./setup.sh
+  - bash ./build_appveyor.sh "%PLATFORM%" "%CONFIGURATION%"
 
 skip_tags: true
