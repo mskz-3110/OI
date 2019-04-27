@@ -1,25 +1,23 @@
 #!/bin/bash
 
-platform=$1
-shift
-
-configuration=$1
-shift
-
-echo "APPVEYOR_BUILD_WORKER_IMAGE=${APPVEYOR_BUILD_WORKER_IMAGE} platform=${platform} configuration=${configuration}"
 case "${APPVEYOR_BUILD_WORKER_IMAGE}" in
 "Visual Studio 2013")
-  echo 2012 2013
+  WINDOWS_VISUAL_STUDIO_VERSIONS=(2012 2013)
   ;;
 "Visual Studio 2015")
-  echo 2015
+  WINDOWS_VISUAL_STUDIO_VERSIONS=(2015)
   ;;
 "Visual Studio 2017")
-  echo 2017
+  WINDOWS_VISUAL_STUDIO_VERSIONS=(2017)
+  ;;
+*)
+  WINDOWS_VISUAL_STUDIO_VERSIONS=()
   ;;
 esac
 
-ruby -v
+WINDOWS_RUNTIMES=(MT MD)
+WINDOWS_ARCHS=(Win32 x64)
+BUILDRAKE_CONFIGS=(debug release)
 
 build_extc(){
   if [ ! -d extc ]; then
@@ -33,8 +31,29 @@ build_extc(){
     fi
     
     rake setup
-    rake build windows debug
-#    rake build windows release
+    for windows_visual_studio_version in ${WINDOWS_VISUAL_STUDIO_VERSIONS[@]}; do
+      case "${windows_visual_studio_version}" in
+      2012)
+        cmake_generator="Visual Studio 11 2012"
+        ;;
+      2013)
+        cmake_generator="Visual Studio 12 2013"
+        ;;
+      2015)
+        cmake_generator="Visual Studio 14 2015"
+        ;;
+      2017)
+        cmake_generator="Visual Studio 15 2017"
+        ;;
+      esac
+      for windows_runtime in ${WINDOWS_RUNTIMES[@]}; do
+        for windows_arch in ${WINDOWS_ARCHS[@]}; do
+          for buildrake_config in ${BUILDRAKE_CONFIGS[@]}; do
+            WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" rake build windows ${buildrake_config}
+          done
+        done
+      done
+    done
   popd
 }
 

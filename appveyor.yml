@@ -6,15 +6,7 @@ image:
   - Visual Studio 2015
   - Visual Studio 2017
 
-platform:
-  - Win32
-  - x64
-
-configuration:
-  - Debug
-  - Release
-
 build_script:
-  - bash ./build_appveyor.sh "%PLATFORM%" "%CONFIGURATION%"
+  - bash ./build_appveyor.sh
 
 skip_tags: true
