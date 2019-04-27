@@ -19,6 +19,8 @@ case "${APPVEYOR_BUILD_WORKER_IMAGE}" in
   ;;
 esac
 
+gem update --system
+
 build_extc(){
   if [ ! -d extc ]; then
     git clone --depth 1 https://github.com/mskz-3110/extc.git
