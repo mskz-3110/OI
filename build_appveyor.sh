@@ -48,11 +48,6 @@ build_extc(){
             cmake_generator="Visual Studio 15 2017"
             ;;
           esac
-          case "${windows_arch}" in
-          x64)
-            cmake_generator="${cmake_generator} Win64"
-            ;;
-          esac
           for config in ${CONFIGS[@]}; do
             echo "[${windows_visual_studio_version} ${windows_runtime} ${windows_arch} ${config}] ${cmake_generator}"
             WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} rake build
