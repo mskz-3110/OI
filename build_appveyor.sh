@@ -19,7 +19,7 @@ case "${APPVEYOR_BUILD_WORKER_IMAGE}" in
   ;;
 esac
 
-gem update --system
+ruby -v
 
 build_extc(){
   if [ ! -d extc ]; then
