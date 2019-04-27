@@ -1,5 +1,4 @@
 image:
-  - Visual Studio 2012
   - Visual Studio 2013
   - Visual Studio 2015
   - Visual Studio 2017
@@ -13,6 +12,6 @@ configuration:
   - Release
 
 build_script:
-  - ./setup.sh "%APPVEYOR_BUILD_WORKER_IMAGE%" "%PLATFORM%" "%CONFIGURATION%"
+  - bash ./setup.sh "%APPVEYOR_BUILD_WORKER_IMAGE%" "%PLATFORM%" "%CONFIGURATION%"
 
 skip_tags: true
