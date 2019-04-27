@@ -15,7 +15,8 @@ case "${APPVEYOR_BUILD_WORKER_IMAGE}" in
   ;;
 esac
 
-cmake -v
+cmake --help
+exit 0
 
 WINDOWS_RUNTIMES=(MT MD)
 WINDOWS_ARCHS=(Win32 x64)
