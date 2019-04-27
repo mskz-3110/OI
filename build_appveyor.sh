@@ -32,6 +32,9 @@ build_extc(){
     fi
     
     rake setup
+    pushd cpp/extc
+      rake setup
+    popd
     for windows_visual_studio_version in ${WINDOWS_VISUAL_STUDIO_VERSIONS[@]}; do
       for windows_runtime in ${WINDOWS_RUNTIMES[@]}; do
         for windows_arch in ${WINDOWS_ARCHS[@]}; do
@@ -59,11 +62,18 @@ build_extc(){
             lib_dir="lib/windows/${windows_visual_studio_version}_${windows_runtime}_${windows_arch}_${config}"
             check_files+=("${PWD}/${lib_dir}/extc.lib")
             check_files+=("${PWD}/${lib_dir}/extc.dll")
+            
+            pushd cpp/extc
+              WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} rake build
+              exit_status=$?
+              if [ 0 -ne ${exit_status} ]; then
+                exit 1
+              fi
+            popd
           done
         done
       done
     done
-    wait
     
     for check_file in ${check_files[@]}; do
       if [ ! -f "${check_file}" ]; then
