@@ -30,6 +30,10 @@ build(){
 build_extc(){
   if [ ! -d extc ]; then
     git clone --depth 1 https://github.com/mskz-3110/extc.git
+    exit_status=$?
+    if [ 0 -ne ${exit_status} ]; then
+      exit 1
+    fi
   fi
   
   check_files=()
