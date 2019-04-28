@@ -19,6 +19,20 @@ WINDOWS_RUNTIMES=(MT MD)
 WINDOWS_ARCHS=(Win32 x64)
 CONFIGS=(Debug Release)
 
+build(){
+  windows_visual_studio_version=$1
+  windows_runtime=$2
+  windows_arch=$3
+  cmake_generator=$4
+  config=$5
+  
+  WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} rake build
+  exit_status=$?
+  if [ 0 -ne ${exit_status} ]; then
+    exit 1
+  fi
+}
+
 build_extc(){
   if [ ! -d extc ]; then
     git clone --depth 1 https://github.com/mskz-3110/extc.git
@@ -50,22 +64,15 @@ build_extc(){
             ;;
           esac
           for config in ${CONFIGS[@]}; do
-            WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} rake build
-            exit_status=$?
-            if [ 0 -ne ${exit_status} ]; then
-              exit 1
-            fi
-            
             lib_dir="lib/windows/${windows_visual_studio_version}_${windows_runtime}_${windows_arch}_${config}"
+            rm -fr ${lib_dir}
+            
+            build ${windows_visual_studio_version} ${windows_runtime} ${windows_arch} ${cmake_generator} ${config}
             check_files+=("${PWD}/${lib_dir}/extc.lib")
             check_files+=("${PWD}/${lib_dir}/extc.dll")
             
             pushd cpp/extc
-              WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} rake build
-              exit_status=$?
-              if [ 0 -ne ${exit_status} ]; then
-                exit 1
-              fi
+              build ${windows_visual_studio_version} ${windows_runtime} ${windows_arch} ${cmake_generator} ${config}
             popd
           done
         done
@@ -79,6 +86,7 @@ build_extc(){
       fi
     done
     
+    rm -fr artifacts
     mkdir artifacts
     mv lib artifacts/.
   popd
