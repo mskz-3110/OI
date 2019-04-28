@@ -1,0 +1,9 @@
+language: objective-c
+
+osx_image: xcode10.2
+
+rvm:
+  - 2.4
+
+script:
+  - bash ./build_travis_ci.sh
