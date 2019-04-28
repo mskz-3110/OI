@@ -2,18 +2,19 @@
 
 if [ -f /etc/redhat-release ]; then
   cat /etc/redhat-release
+  
+  yum install -y git gcc gcc-c++ cmake make
+  yum install -y bzip2 openssl-devel readline-devel zlib-devel
 elif [ -f /etc/os-release ]; then
   cat /etc/os-release
+  
+  
 fi
 
-gcc -dumpversion
+source ./install_ruby.sh
 
 PLATFORMS=(linux)
 CONFIGS=(Debug Release)
-
-get_platform_version(){
-  gcc -dumpversion
-}
 
 build(){
   platform=$1
@@ -41,7 +42,7 @@ build_extc(){
     rake setup
     for platform in ${PLATFORMS[@]}; do
       for config in ${CONFIGS[@]}; do
-        lib_dir="lib/${platform}/$(get_platform_version ${platform})_${config}"
+        lib_dir="lib/${platform}/linux_${config}"
         rm -fr ${lib_dir}
         
         build ${platform} ${config}

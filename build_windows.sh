@@ -26,7 +26,7 @@ build(){
   cmake_generator=$4
   config=$5
   
-  WINDOWS_VISUAL_STUDIO_VERSION=${windows_visual_studio_version} WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} rake build
+  WINDOWS_VISUAL_STUDIO_VERSION="${windows_visual_studio_version}" WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} rake build
   exit_status=$?
   if [ 0 -ne ${exit_status} ]; then
     exit 1
@@ -67,12 +67,12 @@ build_extc(){
             lib_dir="lib/windows/${windows_visual_studio_version}_${windows_runtime}_${windows_arch}_${config}"
             rm -fr ${lib_dir}
             
-            build ${windows_visual_studio_version} ${windows_runtime} ${windows_arch} ${cmake_generator} ${config}
+            build "${windows_visual_studio_version}" ${windows_runtime} ${windows_arch} "${cmake_generator}" ${config}
             check_files+=("${PWD}/${lib_dir}/extc.lib")
             check_files+=("${PWD}/${lib_dir}/extc.dll")
             
             pushd cpp/extc
-              build ${windows_visual_studio_version} ${windows_runtime} ${windows_arch} ${cmake_generator} ${config}
+              build "${windows_visual_studio_version}" ${windows_runtime} ${windows_arch} "${cmake_generator}" ${config}
             popd
           done
         done
