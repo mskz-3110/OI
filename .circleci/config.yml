@@ -28,7 +28,7 @@ jobs:
       - image: ubuntu:18.04
   build_android:
     docker:
-      - image: centos:7
+      - image: ubuntu:18.04
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
     steps:

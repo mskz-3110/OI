@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -f /etc/redhat-release ]; then
-  yum install -y wget unzip
+  yum install -y wget unzip file
   yum install -y git gcc gcc-c++ cmake make
   yum install -y bzip2 openssl-devel readline-devel zlib-devel
 elif [ -f /etc/issue ]; then
