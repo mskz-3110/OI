@@ -3,12 +3,9 @@ workflows:
   version: 2
   build:
     jobs:
-      - build_linux
-jobs:
-  build_linux:
-    docker:
-      - image: centos:7
-      - image: ubuntu:16.04
+      - build_centos7
+      - build_ubuntu16
+_common: &common
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
     steps:
@@ -19,3 +16,12 @@ jobs:
       - store_artifacts:
           path: ./projects/extc/artifacts
           destination: extc_lib_linux
+jobs:
+  build_centos7:
+    <<: *common
+    docker:
+      - image: centos:7
+  build_ubuntu16:
+    <<: *common
+    docker:
+      - image: ubuntu:16.04
