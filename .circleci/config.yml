@@ -15,7 +15,7 @@ jobs:
       - checkout
       - run:
           name: Build
-          command: bash ./build_linux.sh
+          command: RUBY_VERSION=2.4.0 bash ./build_linux.sh
       - store_artifacts:
           path: ./projects/extc/artifacts
           destination: extc_lib_linux

@@ -1,17 +1,19 @@
 #!/bin/bash
 
-if [ -f /etc/redhat-release ]; then
-  cat /etc/redhat-release
+if [ -n "${RUBY_VERSION}" ]; then
+  if [ -f /etc/redhat-release ]; then
+    cat /etc/redhat-release
+    
+    yum install -y git gcc gcc-c++ cmake make
+    yum install -y bzip2 openssl-devel readline-devel zlib-devel
+  elif [ -f /etc/os-release ]; then
+    cat /etc/os-release
+    
+    
+  fi
   
-  yum install -y git gcc gcc-c++ cmake make
-  yum install -y bzip2 openssl-devel readline-devel zlib-devel
-elif [ -f /etc/os-release ]; then
-  cat /etc/os-release
-  
-  
+  source ./install_ruby.sh
 fi
-
-source ./install_ruby.sh
 
 PLATFORMS=(linux)
 CONFIGS=(Debug Release)
@@ -58,7 +60,7 @@ build_extc(){
         
         build ${platform} ${config}
         check_files+=("${PWD}/${lib_dir}/libextc.a")
-        check_files+=("${PWD}/${lib_dir}/libextc.dylib")
+        check_files+=("${PWD}/${lib_dir}/libextc.so")
         
         pushd cpp/extc
           build ${platform} ${config}
