@@ -16,24 +16,31 @@ source ./install_ruby.sh
 PLATFORMS=(linux)
 CONFIGS=(Debug Release)
 
+linux_name(){
+  # TODO
+  echo ""
+}
+
+sh(){
+  command="$*"
+  echo "${PWD}$ ${command}"
+  ${command}
+  exit_status=$?
+  if [ 0 -ne ${exit_status} ]; then
+    exit ${exit_status}
+  fi
+}
+
 build(){
   platform=$1
   config=$2
   
-  PLATFORM=${platform} CONFIG=${config} rake build
-  exit_status=$?
-  if [ 0 -ne ${exit_status} ]; then
-    exit 1
-  fi
+  PLATFORM=${platform} CONFIG=${config} sh rake build
 }
 
 build_extc(){
   if [ ! -d extc ]; then
-    git clone --depth 1 https://github.com/mskz-3110/extc.git
-    exit_status=$?
-    if [ 0 -ne ${exit_status} ]; then
-      exit 1
-    fi
+    sh git clone --depth 1 https://github.com/mskz-3110/extc.git
   fi
   
   check_files=()
@@ -46,7 +53,7 @@ build_extc(){
     rake setup
     for platform in ${PLATFORMS[@]}; do
       for config in ${CONFIGS[@]}; do
-        lib_dir="lib/${platform}/linux_${config}"
+        lib_dir="lib/${platform}/$(linux_name)_${config}"
         rm -fr ${lib_dir}
         
         build ${platform} ${config}

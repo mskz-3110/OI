@@ -19,6 +19,16 @@ WINDOWS_RUNTIMES=(MT MD)
 WINDOWS_ARCHS=(Win32 x64)
 CONFIGS=(Debug Release)
 
+sh(){
+  command="$*"
+  echo "${PWD}$ ${command}"
+  ${command}
+  exit_status=$?
+  if [ 0 -ne ${exit_status} ]; then
+    exit ${exit_status}
+  fi
+}
+
 build(){
   windows_visual_studio_version=$1
   windows_runtime=$2
@@ -26,20 +36,12 @@ build(){
   cmake_generator=$4
   config=$5
   
-  WINDOWS_VISUAL_STUDIO_VERSION="${windows_visual_studio_version}" WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} rake build
-  exit_status=$?
-  if [ 0 -ne ${exit_status} ]; then
-    exit 1
-  fi
+  WINDOWS_VISUAL_STUDIO_VERSION="${windows_visual_studio_version}" WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} sh rake build
 }
 
 build_extc(){
   if [ ! -d extc ]; then
-    git clone --depth 1 https://github.com/mskz-3110/extc.git
-    exit_status=$?
-    if [ 0 -ne ${exit_status} ]; then
-      exit 1
-    fi
+    sh git clone --depth 1 https://github.com/mskz-3110/extc.git
   fi
   
   check_files=()
