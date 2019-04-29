@@ -4,7 +4,7 @@ workflows:
   build:
     jobs:
       - build_centos7
-      - build_ubuntu16
+      - build_ubuntu18
 _common: &common
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
@@ -21,7 +21,7 @@ jobs:
     <<: *common
     docker:
       - image: centos:7
-  build_ubuntu16:
+  build_ubuntu18:
     <<: *common
     docker:
-      - image: ubuntu:16.04
+      - image: ubuntu:18.04

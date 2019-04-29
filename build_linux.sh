@@ -1,19 +1,16 @@
 #!/bin/bash
 
-if [ -n "${RUBY_VERSION}" ]; then
-  if [ -f /etc/redhat-release ]; then
-    cat /etc/redhat-release
-    
-    yum install -y git gcc gcc-c++ cmake make
-    yum install -y bzip2 openssl-devel readline-devel zlib-devel
-  elif [ -f /etc/os-release ]; then
-    cat /etc/os-release
-    
-    
-  fi
-  
-  source ./install_ruby.sh
+if [ -f /etc/redhat-release ]; then
+  yum install -y git gcc gcc-c++ cmake make
+  yum install -y bzip2 openssl-devel readline-devel zlib-devel
+elif [ -f /etc/issue ]; then
+  apt update
+  apt install -y wget
+  apt install -y git gcc g++ cmake make
+  apt install -y bzip2 libssl-dev libreadline-dev zlib1g-dev
 fi
+
+source ./install_ruby.sh
 
 PLATFORMS=(linux)
 CONFIGS=(Debug Release)
