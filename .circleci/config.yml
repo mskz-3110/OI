@@ -5,6 +5,7 @@ workflows:
     jobs:
       - build_centos7
       - build_ubuntu18
+      - build_android
 _common: &common
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
@@ -25,3 +26,16 @@ jobs:
     <<: *common
     docker:
       - image: ubuntu:18.04
+  build_android:
+    docker:
+      - image: centos:7
+    environment:
+      TZ: /usr/share/zoneinfo/Asia/Tokyo
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: RUBY_VERSION=2.4.0 bash ./build_android.sh r10e
+      - store_artifacts:
+          path: ./projects/extc/artifacts
+          destination: extc_lib_android
