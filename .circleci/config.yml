@@ -1,17 +1,21 @@
 version: 2
 workflows:
   version: 2
-  build:
+  tagged-build:
     jobs:
       - build_centos7
+          filters:
+            tags:
+              only: /^ci_*/
       - build_ubuntu18
+          filters:
+            tags:
+              only: /^ci_*/
       - build_android
+          filters:
+            tags:
+              only: /^ci_*/
 _common: &common
-    filters:
-      branches:
-        ignore: /.*/
-      tags:
-        only: /^ci_*/
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
     steps:
