@@ -22,10 +22,6 @@ _common_linux: &common_linux
           path: ./projects/extc/artifacts
           destination: extc_lib_linux
 _common_android: &common_android
-    filters:
-      tags:
-        only:
-          - /^ci_*/
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
     steps:
