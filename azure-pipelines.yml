@@ -5,8 +5,10 @@
 
 trigger:
   branches:
+    exclude:
+    - /.*/
     include:
-    - refs/tags/ci_*
+    - refs/tags/^ci_*
 
 jobs:
 - job: build_xcode

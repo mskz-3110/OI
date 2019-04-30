@@ -8,8 +8,12 @@ workflows:
       - build_android
 _common: &common
     filters:
+      branches:
+        ignore:
+          - /.*/
       tags:
-        only: /ci_*/
+        only:
+          - /^ci_*/
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
     steps:

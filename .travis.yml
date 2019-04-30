@@ -1,6 +1,8 @@
 branches:
+  except:
+    - /.*/
   only:
-  - /ci_*/
+    - /^ci_*/
 
 git:
   depth: 1

@@ -1,6 +1,8 @@
 branches:
+  except:
+    - /.*/
   only:
-  - /ci_*/
+    - /^ci_*/
 
 clone_depth: 1
 
