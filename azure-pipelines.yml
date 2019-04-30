@@ -4,7 +4,9 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  branches:
+    include:
+    - refs/tags/ci_*
 
 jobs:
 - job: build_xcode

@@ -1,3 +1,10 @@
+branches:
+  only:
+  - /ci_*/
+
+git:
+  depth: 1
+
 language: objective-c
 
 osx_image: xcode10.2

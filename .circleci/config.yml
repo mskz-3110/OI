@@ -7,6 +7,9 @@ workflows:
       - build_ubuntu18
       - build_android
 _common: &common
+    filters:
+      tags:
+        only: /ci_*/
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
     steps:
