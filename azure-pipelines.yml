@@ -25,9 +25,10 @@ jobs:
   - script: |
       set PATH="C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin";%PATH%
   - bash: |
+      echo "PATH=${PATH}"
       gem uninstall -I -a -x --user-install --force
       gem install bundler rake
-      RUBY_VERSION=2.4.0 bash ./build_windows.sh 2017
+      PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/MSBuild/15.0/Bin:${PATH}"RUBY_VERSION=2.4.0 bash ./build_windows.sh 2017
 - job: build_ubuntu16
   pool:
     vmImage: 'Ubuntu-16.04'
