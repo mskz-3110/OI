@@ -20,12 +20,13 @@ jobs:
   steps:
   - task: UseRubyVersion@0
     inputs:
-      versionSpec: '>= 2.3'
+      versionSpec: '>= 2.4'
       addToPath: true
+  - script: |
+      call "%VSAPPIDDIR%..\Tools\vsdevcmd\ext\vcvars.bat"
   - bash: |
-      gem uninstall -I -a -x --user-install --force
-      gem install bundler rake
-      RUBY_VERSION=2.4.0 bash ./build_windows.sh
+      gem install --clean bundler rake
+      RUBY_VERSION=2.4.0 bash ./build_windows.sh 2017
 - job: build_ubuntu16
   pool:
     vmImage: 'Ubuntu-16.04'

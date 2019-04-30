@@ -1,19 +1,20 @@
 #!/bin/bash
 
-case "${APPVEYOR_BUILD_WORKER_IMAGE}" in
-"Visual Studio 2015")
-  WINDOWS_VISUAL_STUDIO_VERSIONS=(2015)
-  ;;
-"Visual Studio 2017")
-  WINDOWS_VISUAL_STUDIO_VERSIONS=(2017)
-  ;;
-*)
-  WINDOWS_VISUAL_STUDIO_VERSIONS=()
-  if [ -n "${VS140COMNTOOLS}" ]; then
-    WINDOWS_VISUAL_STUDIO_VERSIONS+=(2017)
-  fi
-  ;;
-esac
+if [ -z "$*" ]; then
+  case "${APPVEYOR_BUILD_WORKER_IMAGE}" in
+  "Visual Studio 2015")
+    WINDOWS_VISUAL_STUDIO_VERSIONS=(2015)
+    ;;
+  "Visual Studio 2017")
+    WINDOWS_VISUAL_STUDIO_VERSIONS=(2017)
+    ;;
+  *)
+    WINDOWS_VISUAL_STUDIO_VERSIONS=()
+    ;;
+  esac
+else
+  WINDOWS_VISUAL_STUDIO_VERSIONS=$*
+fi
 
 WINDOWS_RUNTIMES=(MT MD)
 WINDOWS_ARCHS=(Win32 x64)
