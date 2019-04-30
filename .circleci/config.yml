@@ -9,10 +9,9 @@ workflows:
 _common: &common
     filters:
       branches:
-        ignore:
-          - /.*/
-        only:
-          - /^ci_*/
+        ignore: /.*/
+      tags:
+        only: /^ci_*/
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
     steps:
