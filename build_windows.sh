@@ -37,7 +37,7 @@ build(){
   cmake_generator=$4
   config=$5
   
-  MSBUILD_OPTIONS="\/v:diag" WINDOWS_VISUAL_STUDIO_VERSION="${windows_visual_studio_version}" WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} sh rake build
+  MSBUILD_OPTIONS='/v:diag' WINDOWS_VISUAL_STUDIO_VERSION="${windows_visual_studio_version}" WINDOWS_RUNTIME=${windows_runtime} WINDOWS_ARCH=${windows_arch} CMAKE_GENERATOR="${cmake_generator}" PLATFORM=windows CONFIG=${config} sh rake build
 }
 
 build_extc(){
