@@ -35,15 +35,15 @@ _common_android: &common_android
           path: ./projects/extc/artifacts
           destination: extc_lib_android
 jobs:
-  - build_centos7:
+  build_centos7:
     <<: *common_linux
     docker:
       - image: centos:7
-  - build_ubuntu18:
+  build_ubuntu18:
     <<: *common_linux
     docker:
       - image: ubuntu:18.04
-  - build_android:
+  build_android:
     <<: *common_android
     docker:
       - image: ubuntu:18.04
