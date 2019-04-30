@@ -7,3 +7,4 @@ rvm:
 
 script:
   - bash ./build_xcode.sh
+  - bash ./build_android.sh r10e
