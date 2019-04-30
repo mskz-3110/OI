@@ -1,5 +1,8 @@
 #!/bin/bash
 
+uname
+ls -l /etc
+
 source ./install_packages.sh
 source ./install_ruby.sh
 
