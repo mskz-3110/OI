@@ -24,7 +24,7 @@ jobs:
       addToPath: true
   - bash: |
       gem uninstall -I -a -x --user-install --force
-      gem install bundler
+      gem install bundler rake
       RUBY_VERSION=2.4.0 bash ./build_windows.sh
 - job: build_ubuntu16
   pool:
