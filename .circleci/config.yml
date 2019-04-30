@@ -1,21 +1,15 @@
-version: 2.1
+version: 2
 workflows:
   version: 2
-  tagged-build:
+  build:
     jobs:
-      - build_centos7:
-          filters:
-            tags:
-              only: /^ci_*/
-      - build_ubuntu18:
-          filters:
-            tags:
-              only: /^ci_*/
-      - build_android:
-          filters:
-            tags:
-              only: /^ci_*/
-_common: &common
+      - build_centos7
+      - build_ubuntu18
+      - build_android
+_common_linux: &common_linux
+    filters:
+      tags:
+        only: /^ci_*/
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
     steps:
@@ -26,18 +20,10 @@ _common: &common
       - store_artifacts:
           path: ./projects/extc/artifacts
           destination: extc_lib_linux
-jobs:
-  build_centos7:
-    <<: *common
-    docker:
-      - image: centos:7
-  build_ubuntu18:
-    <<: *common
-    docker:
-      - image: ubuntu:18.04
-  build_android:
-    docker:
-      - image: ubuntu:18.04
+_common_android: &common_android
+    filters:
+      tags:
+        only: /^ci_*/
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
     steps:
@@ -48,3 +34,16 @@ jobs:
       - store_artifacts:
           path: ./projects/extc/artifacts
           destination: extc_lib_android
+jobs:
+  - build_centos7:
+    <<: *common_linux
+    docker:
+      - image: centos:7
+  - build_ubuntu18:
+    <<: *common_linux
+    docker:
+      - image: ubuntu:18.04
+  - build_android:
+    <<: *common_android
+    docker:
+      - image: ubuntu:18.04
