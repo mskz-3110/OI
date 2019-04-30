@@ -6,8 +6,6 @@ echo "VS130COMNTOOLS=${VS130COMNTOOLS}"
 echo "VS140COMNTOOLS=${VS140COMNTOOLS}"
 
 ruby -v
-gem --version
-rake -v
 
 source ./install_ruby.sh
 

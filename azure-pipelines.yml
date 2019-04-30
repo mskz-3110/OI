@@ -18,6 +18,10 @@ jobs:
   pool:
     vmImage: 'vs2015-win2012r2'
   steps:
+  - task: UseRubyVersion@0
+    inputs:
+      versionSpec: '>= 2.4.0'
+      addToPath: true
   - bash: |
       RUBY_VERSION=2.4.0 bash ./build_windows.sh
 - job: build_windows2017
@@ -26,7 +30,7 @@ jobs:
   steps:
   - task: UseRubyVersion@0
     inputs:
-      versionSpec: '>= 2.4'
+      versionSpec: '>= 2.4.0'
       addToPath: true
   - bash: |
       RUBY_VERSION=2.4.0 bash ./build_windows.sh
