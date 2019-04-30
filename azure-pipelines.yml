@@ -14,25 +14,17 @@ jobs:
   - script: |
       bash ./build_xcode.sh
       RUBY_VERSION=2.4.0 bash ./build_android.sh r10e
-- job: build_windows2015
-  pool:
-    vmImage: 'vs2015-win2012r2'
-  steps:
-  - task: UseRubyVersion@0
-    inputs:
-      versionSpec: '>= 2.4.0'
-      addToPath: true
-  - bash: |
-      RUBY_VERSION=2.4.0 bash ./build_windows.sh
 - job: build_windows2017
   pool:
     vmImage: 'vs2017-win2016'
   steps:
   - task: UseRubyVersion@0
     inputs:
-      versionSpec: '>= 2.4.0'
+      versionSpec: '>= 2.3'
       addToPath: true
   - bash: |
+      gem uninstall -I -a -x --user-install --force
+      gem install bundler
       RUBY_VERSION=2.4.0 bash ./build_windows.sh
 - job: build_ubuntu16
   pool:
