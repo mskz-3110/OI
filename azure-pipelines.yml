@@ -13,7 +13,7 @@ jobs:
   steps:
   - script: |
       bash ./build_xcode.sh
-      bash RUBY_VERSION=2.4.0 ./build_android.sh r10e
+      RUBY_VERSION=2.4.0 bash ./build_android.sh r10e
 - job: build_windows2015
   pool:
     vmImage: 'vs2015-win2012r2'
@@ -32,4 +32,4 @@ jobs:
   steps:
   - script: |
       sudo bash ./build_linux.sh
-      sudo bash RUBY_VERSION=2.4.0 ./build_android.sh r10e
+      sudo RUBY_VERSION=2.4.0 bash ./build_android.sh r10e
