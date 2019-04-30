@@ -13,14 +13,14 @@ jobs:
   steps:
   - script: |
       bash ./build_xcode.sh
-      bash ./build_android.sh r10e
-- job: build_windows2015
+      bash RUBY_VERSION=2.4.0 ./build_android.sh r10e
+- job: build_windows2019
   pool:
-    vmImage: 'vs2015-win2012r2'
+    vmImage: 'windows-2019'
   steps:
   - task: UseRubyVersion@0
     inputs:
-      versionSpec: '>= 2.3'
+      versionSpec: '= 2.4.3'
       addToPath: true
   - script: |
       bash ./build_windows.sh
@@ -30,7 +30,7 @@ jobs:
   steps:
   - task: UseRubyVersion@0
     inputs:
-      versionSpec: '>= 2.6'
+      versionSpec: '= 2.4.3'
       addToPath: true
   - script: |
       bash ./build_windows.sh
@@ -39,5 +39,5 @@ jobs:
     vmImage: 'Ubuntu-16.04'
   steps:
   - script: |
-      sudo bash ./build_linux.sh
-      sudo bash ./build_android.sh r10e
+      bash ./build_linux.sh
+      bash RUBY_VERSION=2.4.0 ./build_android.sh r10e
