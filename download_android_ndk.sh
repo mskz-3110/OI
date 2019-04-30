@@ -29,7 +29,7 @@ pushd ${ANDROID_NDK_DIR}
         wget ${url} -O ${zip_file}
       fi
       
-      unzip ${zip_file}
+      unzip -q ${zip_file}
     fi
   done
 popd
