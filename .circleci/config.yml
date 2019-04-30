@@ -9,7 +9,8 @@ workflows:
 _common_linux: &common_linux
     filters:
       tags:
-        only: /^ci_*/
+        only:
+          - /^ci_*/
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
     steps:
@@ -23,7 +24,8 @@ _common_linux: &common_linux
 _common_android: &common_android
     filters:
       tags:
-        only: /^ci_*/
+        only:
+          - /^ci_*/
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
     steps:
