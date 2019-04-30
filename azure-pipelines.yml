@@ -19,13 +19,15 @@ jobs:
     vmImage: 'vs2015-win2012r2'
   steps:
   - script: |
-      RUBY_VERSION=2.4.0 bash ./build_windows.sh
+      set RUBY_VERSION=2.4.0
+      bash ./build_windows.sh
 - job: build_windows2017
   pool:
     vmImage: 'vs2017-win2016'
   steps:
   - script: |
-      RUBY_VERSION=2.4.0 bash ./build_windows.sh
+      set RUBY_VERSION=2.4.0
+      bash ./build_windows.sh
 - job: build_ubuntu16
   pool:
     vmImage: 'Ubuntu-16.04'
