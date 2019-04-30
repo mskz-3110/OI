@@ -7,11 +7,12 @@ workflows:
       - build_ubuntu18
       - build_android
 _common: &common
-    branches:
-      ignore:
-        - /.*/
-      only:
-        - /^ci_*/
+    filters:
+      branches:
+        ignore:
+          - /.*/
+        only:
+          - /^ci_*/
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
     steps:
