@@ -5,7 +5,9 @@ echo "VS120COMNTOOLS=${VS120COMNTOOLS}"
 echo "VS130COMNTOOLS=${VS130COMNTOOLS}"
 echo "VS140COMNTOOLS=${VS140COMNTOOLS}"
 
-source ./install_ruby.sh
+ruby -v
+gem --version
+rake -v
 
 case "${APPVEYOR_BUILD_WORKER_IMAGE}" in
 "Visual Studio 2015")

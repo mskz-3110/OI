@@ -18,15 +18,23 @@ jobs:
   pool:
     vmImage: 'vs2015-win2012r2'
   steps:
+  - task: UseRubyVersion@0
+    inputs:
+      versionSpec: '>= 2.4'
+      addToPath: true
   - script: |
-      set RUBY_VERSION=2.4.0
+      CALL gem install bundler
       bash ./build_windows.sh
 - job: build_windows2017
   pool:
     vmImage: 'vs2017-win2016'
   steps:
+  - task: UseRubyVersion@0
+    inputs:
+      versionSpec: '>= 2.4'
+      addToPath: true
   - script: |
-      set RUBY_VERSION=2.4.0
+      CALL gem install bundler
       bash ./build_windows.sh
 - job: build_ubuntu16
   pool:
