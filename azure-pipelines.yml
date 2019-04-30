@@ -20,7 +20,7 @@ jobs:
   steps:
   - task: UseRubyVersion@0
     inputs:
-      versionSpec: '>= 2.4'
+      versionSpec: '>= 2.3'
       addToPath: true
   - script: |
       bash ./build_windows.sh
@@ -30,7 +30,7 @@ jobs:
   steps:
   - task: UseRubyVersion@0
     inputs:
-      versionSpec: '>= 2.4'
+      versionSpec: '>= 2.6'
       addToPath: true
   - script: |
       bash ./build_windows.sh
@@ -39,5 +39,5 @@ jobs:
     vmImage: 'Ubuntu-16.04'
   steps:
   - script: |
-      bash ./build_linux.sh
-      bash ./build_android.sh r10e
+      sudo bash ./build_linux.sh
+      sudo bash ./build_android.sh r10e
