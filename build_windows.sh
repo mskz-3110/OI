@@ -9,6 +9,8 @@ ruby -v
 gem --version
 rake -v
 
+source ./install_ruby.sh
+
 case "${APPVEYOR_BUILD_WORKER_IMAGE}" in
 "Visual Studio 2015")
   WINDOWS_VISUAL_STUDIO_VERSIONS=(2015)
