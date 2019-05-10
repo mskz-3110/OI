@@ -47,5 +47,20 @@ workflows:
   all:
     jobs:
       - build_centos7
+        filters:
+          branches:
+            ignore: /.*/
+          tags:
+            only: /^ci_*/
       - build_ubuntu18
+        filters:
+          branches:
+            ignore: /.*/
+          tags:
+            only: /^ci_*/
       - build_android
+        filters:
+          branches:
+            ignore: /.*/
+          tags:
+            only: /^ci_*/
