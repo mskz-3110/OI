@@ -1,14 +1,17 @@
-version: 2
-workflows:
-  version: 2
-  build:
-    jobs:
-      - build_centos7
-      - build_ubuntu18
-      - build_android
-_common_linux: &common_linux
+version: 2.1
+executors:
+  centos7:
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
+    docker:
+      - image: centos:7
+  ubuntu18:
+    environment:
+      TZ: /usr/share/zoneinfo/Asia/Tokyo
+    docker:
+      - image: ubuntu:18.04
+commands:
+  build_linux:
     steps:
       - checkout
       - run:
@@ -17,9 +20,7 @@ _common_linux: &common_linux
       - store_artifacts:
           path: ./projects/extc/artifacts
           destination: extc_lib_linux
-_common_android: &common_android
-    environment:
-      TZ: /usr/share/zoneinfo/Asia/Tokyo
+  build_android:
     steps:
       - checkout
       - run:
@@ -30,14 +31,21 @@ _common_android: &common_android
           destination: extc_lib_android
 jobs:
   build_centos7:
-    <<: *common_linux
-    docker:
-      - image: centos:7
+    executor: centos7
+    steps:
+      - build_linux
   build_ubuntu18:
-    <<: *common_linux
-    docker:
-      - image: ubuntu:18.04
+    executor: ubuntu18
+    steps:
+      - build_linux
   build_android:
-    <<: *common_android
-    docker:
-      - image: ubuntu:18.04
+    executor: ubuntu18
+    steps:
+      - build_android
+workflows:
+  version: 2
+  all:
+    jobs:
+      - build_centos7
+      - build_ubuntu18
+      - build_android
