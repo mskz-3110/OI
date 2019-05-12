@@ -10,7 +10,6 @@ install:
   - set PATH=C:\Ruby24\bin;%PATH%
 
 image:
-  - Visual Studio 2015
   - Visual Studio 2017
 
 build_script:
