@@ -1,5 +1,5 @@
 #!/bin/bash
 
 if [ ! -f mash.bash ]; then
-  wget -q https://raw.githubusercontent.com/mskz-3110/mash/master/mash.bash -O mash.bash
+  curl -sS -H "Cache-Control: no-cache" https://raw.githubusercontent.com/mskz-3110/mash/master/mash.bash -o mash.bash
 fi
