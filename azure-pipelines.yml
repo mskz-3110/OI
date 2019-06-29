@@ -16,8 +16,9 @@ jobs:
     vmImage: 'macOS-10.14'
   steps:
   - script: |
-      bash ./build_xcode.sh
-      RUBY_VERSION=2.4.0 bash ./build_android.sh r10e
+      bash ./build_macos.sh
+      bash ./build_ios.sh
+      RUBY_VERSION=2.4.0 ANDROID_NDK_VERSION=r10e bash ./build_android.sh
 - job: build_windows2017
   pool:
     vmImage: 'vs2017-win2016'
@@ -37,4 +38,4 @@ jobs:
   steps:
   - script: |
       sudo bash ./build_linux.sh
-      sudo RUBY_VERSION=2.4.0 bash ./build_android.sh r10e
+      sudo RUBY_VERSION=2.4.0 ANDROID_NDK_VERSION=r10e bash ./build_android.sh

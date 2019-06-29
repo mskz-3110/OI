@@ -15,5 +15,6 @@ rvm:
   - 2.4
 
 script:
-  - bash ./build_xcode.sh
-  - bash ./build_android.sh r10e
+  - bash ./build_macos.sh
+  - bash ./build_ios.sh
+  - ANDROID_NDK_VERSION=r10e bash ./build_android.sh

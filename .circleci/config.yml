@@ -25,7 +25,7 @@ commands:
       - checkout
       - run:
           name: Build
-          command: RUBY_VERSION=2.4.0 bash ./build_android.sh r10e
+          command: RUBY_VERSION=2.4.0 ANDROID_NDK_VERSION=r10e bash ./build_android.sh
       - store_artifacts:
           path: ./projects/extc/artifacts
           destination: extc_lib_android
