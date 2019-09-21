@@ -3,13 +3,6 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-#trigger:
-#  branches:
-#    exclude:
-#    - /.*/
-#    include:
-#    - refs/tags/^ci_*
-
 jobs:
 - job: build_xcode
   pool:

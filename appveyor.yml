@@ -1,9 +1,3 @@
-#branches:
-#  except:
-#    - /.*/
-#  only:
-#    - /^ci_*/
-
 clone_depth: 1
 
 install:
