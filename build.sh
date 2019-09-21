@@ -1,23 +1,19 @@
 #!/bin/bash
 
-bash ./download_mash.sh
-MASH=mash.bash
-source ${MASH}
+source mash.bash
 
 bash ./setup_projects.sh
 
-chdir projects
-  projects_dir=$PWD
-  
-  chdir extc
-    extc_dir=$PWD
-    
+changed projects
+  changed extc
     build_all extc
     
-    chdir cpp/extc
+    changed cpp/extc
       build_all cpp/extc
-    chdir ${extc_dir}
+    popd
     
-    rmkdir artifacts
+    remaked artifacts
+    popd
+    
     copy lib artifacts/.
-  chdir ${projects_dir}
+popd

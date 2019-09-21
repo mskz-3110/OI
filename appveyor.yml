@@ -9,8 +9,10 @@ clone_depth: 1
 install:
   - set PATH=C:\Ruby24\bin;%PATH%
 
-image:
-  - Visual Studio 2017
+environment:
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      WINDOWS_VISUAL_STUDIO_VERSION: 2017
 
 build_script:
   - bash ./build_windows.sh

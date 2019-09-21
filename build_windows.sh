@@ -1,13 +1,5 @@
 #!/bin/bash
 
-if [ -n "${APPVEYOR_BUILD_WORKER_IMAGE}" ]; then
-  case "${APPVEYOR_BUILD_WORKER_IMAGE}" in
-  "Visual Studio 2017")
-    export WINDOWS_VISUAL_STUDIO_VERSION=2017
-    ;;
-  esac
-fi
-
 if [ -z "${WINDOWS_VISUAL_STUDIO_VERSION}" ]; then
   echo "Not found: WINDOWS_VISUAL_STUDIO_VERSION"
   exit 1
@@ -28,7 +20,7 @@ build_all(){
     cmake_generator="Visual Studio 15 2017"
     ;;
   *)
-    echo "Unsupported: WINDOWS_VISUAL_STUDIO_VERSION ${WINDOWS_VISUAL_STUDIO_VERSION}"
+    echo "Unsupported WINDOWS_VISUAL_STUDIO_VERSION: ${WINDOWS_VISUAL_STUDIO_VERSION}"
     exit 1
     ;;
   esac

@@ -1,21 +1,18 @@
 #!/bin/bash
 
-MASH=mash.bash
-source ${MASH}
+source mash.bash
 
-GEMS_DIR=$PWD/gems
+GEMS_DIR=${PWD}/gems
 
-chdir projects
-  projects_dir=$PWD
-  
+changed projects
   if [ ! -d extc ]; then
     sh git clone https://github.com/mskz-3110/extc.git
   fi
   
-  chdir extc
+  changed extc
     bundle install
-    if [ -f ${GEMS_DIR}/buildrake.gem ]; then
-      gem install ${GEMS_DIR}/buildrake.gem
-    fi
+    gem install ${GEMS_DIR}/buildrake.gem
     
     rake setup
+  popd
+popd
