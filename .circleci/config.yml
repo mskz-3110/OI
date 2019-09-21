@@ -48,4 +48,4 @@ workflows:
     jobs:
       - build_centos7
       - build_ubuntu18
-      - build_android
+#      - build_android

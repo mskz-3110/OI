@@ -3,6 +3,8 @@
 source ./install_packages.sh
 source ./install_ruby.sh
 
+source mash.bash
+
 if [ -z "${ANDROID_NDK}" ]; then
   if [ -z "${ANDROID_NDK_VERSION}" ]; then
     echo "Not found: ANDROID_NDK_VERSION"
@@ -12,7 +14,7 @@ if [ -z "${ANDROID_NDK}" ]; then
   if [ -z "${ANDROID_NDK_INSTALL_DIR}" ]; then
     export ANDROID_NDK_INSTALL_DIR="/tmp"
   fi
-  bash ./download_android_ndk.sh
+  sh bash ./download_android_ndk.sh
   export ANDROID_NDK="${ANDROID_NDK_INSTALL_DIR}/android-ndk-${ANDROID_NDK_VERSION}"
 fi
 

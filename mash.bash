@@ -43,7 +43,9 @@ changed(){
 
 maked(){
   path=$1
-  sh mkdir -p ${path}
+  if [ ! -d "${path}" ]; then
+    sh mkdir -p ${path}
+  fi
   changed ${path}
 }
 
