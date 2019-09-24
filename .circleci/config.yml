@@ -3,11 +3,13 @@ executors:
   centos7:
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
+      PACKAGE_MANAGER: yum
     docker:
       - image: centos:7
   ubuntu18:
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
+      PACKAGE_MANAGER: apt
     docker:
       - image: ubuntu:18.04
 commands:
@@ -20,15 +22,6 @@ commands:
       - store_artifacts:
           path: ./projects/extc/artifacts
           destination: extc_lib_linux
-  build_android:
-    steps:
-      - checkout
-      - run:
-          name: Build
-          command: RUBY_VERSION=2.4.0 ANDROID_NDK_VERSION=r10e bash ./build_android.sh
-      - store_artifacts:
-          path: ./projects/extc/artifacts
-          destination: extc_lib_android
 jobs:
   build_centos7:
     executor: centos7
@@ -38,14 +31,9 @@ jobs:
     executor: ubuntu18
     steps:
       - build_linux
-  build_android:
-    executor: ubuntu18
-    steps:
-      - build_android
 workflows:
   version: 2
   all:
     jobs:
       - build_centos7
       - build_ubuntu18
-#      - build_android

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-source ./install_packages.sh
 source ./install_ruby.sh
 
 source mash.bash
@@ -14,6 +13,7 @@ if [ -z "${ANDROID_NDK}" ]; then
   if [ -z "${ANDROID_NDK_INSTALL_DIR}" ]; then
     export ANDROID_NDK_INSTALL_DIR="/tmp"
   fi
+  
   sh bash ./download_android_ndk.sh
   export ANDROID_NDK="${ANDROID_NDK_INSTALL_DIR}/android-ndk-${ANDROID_NDK_VERSION}"
 fi
