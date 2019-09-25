@@ -6,6 +6,8 @@ if [ -z "${WINDOWS_VISUAL_STUDIO_VERSION}" ]; then
 fi
 
 build_all(){
+  ls -R ../../lib
+  
   case "${WINDOWS_VISUAL_STUDIO_VERSION}" in
   2012)
     cmake_generator="Visual Studio 11 2012"
